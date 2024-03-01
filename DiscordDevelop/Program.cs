@@ -23,6 +23,8 @@ public class Program
         Client = new DiscordClient(discordConfig);
 
         Client.Ready += Client_Ready;
+        Client.GuildMemberRemoved += Client_GuildMemberRemoved;
+        Client.GuildBanAdded += Client_GuildBanAdded;
 
         var commandsConfig = new CommandsNextConfiguration()
         {
@@ -44,5 +46,17 @@ public class Program
     private static Task Client_Ready(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
     {
         return Task.CompletedTask;
+    }
+    private static async Task Client_GuildMemberRemoved(DiscordClient sender, DSharpPlus.EventArgs.GuildMemberRemoveEventArgs args)
+    {
+        var guild = args.Guild;
+        var channel = await sender.GetChannelAsync(1073548515151708161); // Replace CHANNEL_ID with the ID of the channel where you want to send the message
+        await channel.SendMessageAsync($"Địt con mẹ thằng {args.Member.Username} nó bỏ rồi ae ơi."); // Send a message to the specified channel when a member leaves
+    }
+    private static async Task Client_GuildBanAdded(DiscordClient sender, DSharpPlus.EventArgs.GuildBanAddEventArgs args)
+    {
+        var guild = args.Guild;
+        var channel = await sender.GetChannelAsync(1073548515151708161); // Replace CHANNEL_ID with the ID of the channel where you want to send the message
+        await channel.SendMessageAsync($"Thằng {args.Member.Username} láo quá nên Kick."); // Send a message to the specified channel when a member is kicked
     }
 }

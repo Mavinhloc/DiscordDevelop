@@ -1,6 +1,7 @@
 ﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,17 @@ namespace DiscordDevelop.commands
         {
             await context.RespondAsync("whatsup");
         }
+
+        [Command("Sus")]
+        public async Task SusCommand(CommandContext context)
+        {
+            var message = new DiscordMessageBuilder()
+                .AddEmbed(new DiscordEmbedBuilder().WithTimestamp(DateTime.UtcNow)
+                .WithDescription("⬛⬛⬛⬛⬛⬛\r\n⬛\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5⬛\r\n⬛⬛⬛⬛⬛\U0001f7e5\U0001f7e5⬛⬛\r\n⬛\U0001f7e6\U0001f7e6\U0001f7e6\U0001f7e6⬛\U0001f7e5⬛\U0001f7e5⬛\r\n⬛\U0001f7e6\U0001f7e6\U0001f7e6⬛\U0001f7e5\U0001f7e5⬛\U0001f7e5⬛\r\n‍‌‍‌‍‌‍‌‍‌‍‌‌‍‍‍‍‌‍‌‍‌‍‌‍‌‍‌⬛⬛⬛⬛\U0001f7e5\U0001f7e5\U0001f7e5⬛\U0001f7e5⬛\r\n⬛\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5⬛\U0001f7e5⬛\r\n⬛\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5⬛\U0001f7e5⬛\r\n⬛\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5\U0001f7e5⬛⬛\r\n⬛\U0001f7e5\U0001f7e5⬛⬛\U0001f7e5\U0001f7e5⬛\r\n⬛\U0001f7e5\U0001f7e5⬛⬛\U0001f7e5\U0001f7e5⬛")
+                );
+
+            await context.Channel.SendMessageAsync(message);
+        }
         public static void RegisterEvents(DiscordClient client)
         {
             client.MessageCreated += OnMessage;
@@ -35,7 +47,16 @@ namespace DiscordDevelop.commands
                 // Respond with "Lưới"
                 await e.Message.RespondAsync("Lưới");
             }
-        }
 
+            //// Check if the message content contains the word "tranf"
+            //if (e.Message.Content.ToLower().Contains("trang"))
+            //{
+            //    // Replace "stickerId" with the ID of your sticker in the Discord server
+            //    ulong stickerId = 1212975821187194881;
+
+            //    // Send the sticker as a response
+            //    await e.Message.RespondAsync($"<:{stickerId}>");
+            //}
+        }
     }
 }
